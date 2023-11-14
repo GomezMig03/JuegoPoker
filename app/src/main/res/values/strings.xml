@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">JuegoPoker</string>
+    <string name="Coins">Fichas: </string>
+    <string name="fold">Fold</string>
+    <string name="allIn">All-In</string>
+    <string name="call">Call</string>
 </resources>
