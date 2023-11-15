@@ -1,7 +1,5 @@
 package com.example.juegopoker
 
-import androidx.compose.runtime.structuralEqualityPolicy
-
 fun esMayor(c1: Int, c2: Int, c3: Int, c4: Int, c5: Int): Int {
     return maxOf(c1, c2, c3, c4, c5)
 }

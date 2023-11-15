@@ -4,6 +4,8 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -23,6 +25,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
+import androidx.compose.ui.Alignment.Companion.Center
 import androidx.compose.ui.Alignment.Companion.CenterHorizontally
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
@@ -48,8 +51,6 @@ class MainActivity : ComponentActivity() {
 fun JuegoPokerView() {
     PokerMainGame()
 }
-
-data class Carta(val tipo: String, val valor: Int)
 
 //Juego de poker
 @Composable
@@ -137,21 +138,44 @@ fun stats(modifier: Modifier=Modifier){
 
 @Composable
 fun mano(modifier: Modifier=Modifier) {
-    Row(
+    var carta1 by remember { mutableStateOf( 53) }
+    var carta2 by remember { mutableStateOf( 53) }
+    var botonVisible by remember { mutableStateOf(true) }
+    Box(
     ) {
-        //Flop
-        Image(
-            painter = painterResource(R.drawable.back),
-            contentDescription = "reverso",
-            modifier
-                .size(200.dp)
-        )
-        Image(
-            painter = painterResource(R.drawable.back),
-            contentDescription = "reverso",
-            modifier
-                .size(200.dp)
-        )
+        Row(
+        ) {
+            //Flop
+            Image(
+                painter = painterResource(getCartaPorNumero(carta1)),
+                contentDescription = "carta",
+                modifier
+                    .size(200.dp)
+            )
+            Image(
+                painter = painterResource(getCartaPorNumero(carta2)),
+                contentDescription = "carta",
+                modifier
+                    .size(200.dp)
+            )
+        }
+            if (botonVisible) {
+                Spacer(
+                    modifier=Modifier
+                        .width(100.dp)
+                )
+                Button(onClick = {
+                    carta1 = getCartaAleatoria()
+                    carta2 = getCartaAleatoria()
+                    botonVisible = false
+                } ) {
+                    Text(
+                        text = stringResource(R.string.start),
+                        fontSize = 24.sp
+                    )
+
+                }
+            }
     }
 }
 

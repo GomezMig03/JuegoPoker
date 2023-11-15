@@ -1,6 +1,6 @@
 package com.example.juegopoker
 
-fun CartaPorNumero(num: Number=0): Int {
+fun getCartaPorNumero(num: Number=0): Int {
     val imageResource =
         when (num) {
             1 -> R.drawable.c1
@@ -59,4 +59,56 @@ fun CartaPorNumero(num: Number=0): Int {
             else -> R.drawable.back
         }
     return imageResource
+}
+
+fun cartaToString(num: Int): String {
+    var carta=""+ getNombreCarta(num)
+    val clubsRango = 1..13
+    val spadesRango = 14..26
+    val heartsRango = 27..39
+    val diamondsRango = 40..52
+    carta+=when (num) {
+        in clubsRango -> " de treboles"
+        in spadesRango -> " de picas"
+        in heartsRango -> " de corazones"
+        in diamondsRango -> " de diamantes"
+        else -> null
+    }
+    return carta
+}
+
+fun getNombreCarta(num: Int): String {
+    when (getCartaValor(num)) {
+        1 -> return "uno"
+        2 -> return "dos"
+        3 -> return "tres"
+        4 -> return "cuatro"
+        5 -> return "cinco"
+        6 -> return "seis"
+        7 -> return "siete"
+        8 -> return "ocho"
+        9 -> return "nueve"
+        10 -> return "diez"
+        11 -> return "sota"
+        12 -> return "reina"
+        13 -> return "rey"
+        else -> return "null"
+    }
+}
+fun getCartaValor(num: Int): Int {
+    val clubsRango = 1..13
+    val spadesRango = 14..26
+    val heartsRango = 27..39
+    val diamondsRango = 40..52
+    when (num) {
+        in clubsRango -> return clubsRango.indexOf(num)+1
+        in spadesRango -> return spadesRango.indexOf(num)+1
+        in heartsRango -> return heartsRango.indexOf(num)+1
+        in diamondsRango -> return diamondsRango.indexOf(num)+1
+        else -> return 0
+    }
+}
+
+fun getCartaAleatoria(): Int {
+    return ((1..52).random())
 }
