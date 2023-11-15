@@ -158,7 +158,6 @@ fun mano(modifier: Modifier=Modifier) {
 @Composable
 fun botones(modifier: Modifier=Modifier) {
     Row(
-
     ){
         Button(onClick = { /*TODO*/ },
             modifier = modifier.size(100.dp)

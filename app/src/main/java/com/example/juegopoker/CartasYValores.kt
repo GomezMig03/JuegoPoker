@@ -1,16 +1,5 @@
 package com.example.juegopoker
 
-fun CardValues(c1: Int, c2: Int, c3: Int, c4: Int, c5: Int) {
-    val mayor = maxOf(c1, c2, c3, c4, c5)
-
-}
-
-fun CartasRepetidas(vararg numeros: Int) {
-    val numerosUnicos = numeros.toSet()
-
-
-}
-
 fun CartaPorNumero(num: Number=0): Int {
     val imageResource =
         when (num) {
