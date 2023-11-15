@@ -24,6 +24,7 @@ fun HayTrio(vararg numeros: Int): Boolean{
     return contador.any { it.value >= 3 }
 }
 
+//falta contar si las cartas son del mismo color
 fun HayEscalera(vararg numeros: Int): Boolean{
     var contador1=0;
     var contador2=13;
