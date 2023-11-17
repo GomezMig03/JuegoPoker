@@ -109,6 +109,36 @@ fun getCartaValor(num: Int): Int {
     }
 }
 
-fun getCartaAleatoria(): Int {
-    return ((1..52).random())
+
+fun getCartaAleatoria(vararg numeros: Int): Int {
+    var x: Int
+    do {
+        x=(1..52).random()
+    } while (x in numeros)
+    return x
+}
+
+fun getCombinacion(c1: Int,c2: Int,c3: Int,c4: Int,c5: Int): String {
+    if (hayEscaleraReal(c1, c2, c3, c4, c5)) {
+        return "Escalera Real"
+    } else if (hayEscColor(c1, c2, c3, c4, c5)) {
+        return "Ecalera de Color"
+    } else if (hayPoker(c1, c2, c3, c4, c5)) {
+        return "Poker"
+    } else if (hayFull(c1, c2, c3, c4, c5)) {
+        return "Full"
+    } else if (hayColor(c1, c2, c3, c4, c5)) {
+        return "Color"
+    } else if (hayEscalera(c1, c2, c3, c4, c5)) {
+        return "Escalera"
+    } else if (hayTrio(c1, c2, c3, c4, c5)) {
+        return "Trio"
+    } else if (hayDoblePareja(c1, c2, c3, c4, c5)) {
+        return "Doble pareja"
+    } else if (hayPareja(c1, c2, c3, c4, c5)) {
+        return "Pareja"
+    } else {
+        val x= esMayor(c1, c2, c3, c4, c5)
+        return "numero mayor: $x"
+    }
 }
