@@ -4,12 +4,15 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.material3.Button
@@ -19,7 +22,9 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Alignment.Companion.CenterHorizontally
+import androidx.compose.ui.Alignment.Companion.Top
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -55,13 +60,14 @@ fun PokerMainGame(modifier:Modifier=Modifier){
     var carta5 by remember { mutableStateOf(0)}
     var combinacion by remember { mutableStateOf("") }
     Row(modifier = modifier
-        .fillMaxSize()){
-        Spacer(
-            modifier.width(100.dp)
-        )
+        .fillMaxSize(),
+        verticalAlignment = Alignment.Top,
+        horizontalArrangement = Arrangement.Center){
         Text(
             text = combinacion,
-            fontSize = 50.sp,
+            fontSize = 42.sp,
+            modifier = Modifier
+                .fillMaxWidth()
         )
     }
     Column(
@@ -73,18 +79,18 @@ fun PokerMainGame(modifier:Modifier=Modifier){
             modifier
                 .height(125.dp)
         )
-        //Primera fila con las cartas que vamos a estar viendo
+        //Primera fila con las cartas de la mano comunitaria
         Row {
             //Flop
             Image(
                 painter = painterResource(getCartaPorNumero(carta3)),
-                contentDescription = "reverso",
+                contentDescription = getNombreCarta(carta3),
                 modifier
                     .size(130.dp)
             )
             Image(
                 painter = painterResource(getCartaPorNumero(carta4)),
-                contentDescription = "reverso",
+                contentDescription = getNombreCarta(carta4),
                 modifier
                     .size(130.dp)
             )
@@ -148,10 +154,12 @@ fun PokerMainGame(modifier:Modifier=Modifier){
         //Tercera fila con las opciones(botones) que tenemos
         Row {
             Button(onClick = {
-                carta3=getCartaAleatoria(carta1, carta2)
-                carta4=getCartaAleatoria(carta1, carta2, carta3)
-                carta5=getCartaAleatoria(carta1, carta2, carta3, carta4)
-                combinacion= getCombinacion(carta1, carta2, carta3, carta4, carta5)
+                if (!botonVisible) {
+                    carta3=getCartaAleatoria(carta1, carta2)
+                    carta4=getCartaAleatoria(carta1, carta2, carta3)
+                    carta5=getCartaAleatoria(carta1, carta2, carta3, carta4)
+                    combinacion= getCombinacion(carta1, carta2, carta3, carta4, carta5)
+                }
             },
                 modifier = modifier.size(100.dp)
             ) {
@@ -165,11 +173,13 @@ fun PokerMainGame(modifier:Modifier=Modifier){
                 modifier.width(32.dp)
             )
             Button(onClick = {
-                carta1 = getCartaAleatoria()
-                carta2 = getCartaAleatoria(carta1)
-                carta3 = 0
-                carta4 = 0
-                carta5 = 0
+                if (!botonVisible) {
+                    carta1 = getCartaAleatoria()
+                    carta2 = getCartaAleatoria(carta1)
+                    carta3 = 0
+                    carta4 = 0
+                    carta5 = 0
+                }
                              },
                 modifier = modifier.size(100.dp)
             ) {
