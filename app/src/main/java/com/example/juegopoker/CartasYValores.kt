@@ -139,6 +139,6 @@ fun getCombinacion(c1: Int,c2: Int,c3: Int,c4: Int,c5: Int): String {
         return "Pareja"
     } else {
         val x= esMayor(c1, c2, c3, c4, c5)
-        return "numero mayor: $x"
+        return "Carta mayor: $x"
     }
 }
